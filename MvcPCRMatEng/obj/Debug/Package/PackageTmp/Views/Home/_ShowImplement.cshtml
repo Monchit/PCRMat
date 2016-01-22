@@ -1,0 +1,29 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+<style>
+    .thead {
+        font-weight: bold;
+    }
+</style>
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td style="width:350px;" class="thead">Implement Date</td>
+        <td class="thead">Start Batch No.</td>
+    </tr>
+    <tr>
+        <td>@Model.imp_dt.Value.ToString("dd/MM/yyyy")</td>
+        <td>@Html.DisplayFor(d => d.start_batch)</td>
+    </tr>
+    <tr>
+        <td class="thead">Compound name / Item code</td>
+        <td class="thead">File Compound / Item code</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.start_compound)</td>
+        <td>@if(Model.start_compound_file != null){
+                <a href="@Url.Content(Model.start_compound_file)" target="_blank">View</a>
+        }
+        </td>
+    </tr>
+</table>

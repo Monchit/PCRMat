@@ -1,0 +1,30 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#formReturn").submit(function () {
+            if (!$.validate({ form: "formReturn" })) {
+                return false;
+            }
+            if (confirm("Are you sure you want to Return to Issuer ?")) {
+                //document.forms["formReturn"].submit();
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<form id="formReturn" name="formReturn" action="@Url.Action("ReturnToIssuer", "Home")" method="post" class="row-fluid">
+    <label><strong>Reason for Return</strong></label>
+    <textarea rows="3" class="span8" id="txaReason" name="txaReason" data-validate="required"></textarea>
+
+    <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+    <input type="hidden" value="@Model.status_id" id="hdST" name="hdST" />
+
+    @*<p><input type="submit" class="btn btn-warning" value="Return to Issuer" /></p>*@
+    <p><button type="submit" class="btn btn-warning">Return to Issuer</button></p>
+</form>

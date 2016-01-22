@@ -1,0 +1,36 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#formIPQC").submit(function () {
+            if ($("#fileIPQC").val() == '') {
+                $("#fileIPQC").removeClass("valid").addClass("error");
+                return false;
+            } else {
+                $("#fileIPQC").removeClass("error").addClass("valid");
+            }
+
+            if (!$.validate({ form: "formIPQC" })) {
+                return false;
+            }
+
+            if (confirm("Are you sure you want to Submit ?")) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<form id="formIPQC" name="formIPQC" action="@Url.Action("AttachIPQC", "Home")" method="post" class="row-fluid" enctype="multipart/form-data">
+    <label><strong>IPQC File</strong></label>
+    <input type="file" id="fileIPQC" name="fileIPQC" class="file" />
+
+    <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+    <input type="hidden" value="@Model.status_id" id="hdST" name="hdST" />
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

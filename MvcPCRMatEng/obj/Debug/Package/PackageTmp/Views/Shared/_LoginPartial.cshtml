@@ -1,0 +1,55 @@
+﻿@*@if (Session["PCRME_Auth"] == null)
+{
+    <text>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#formLogin").submit(function () {
+                    if (!$.validate({ form: 'formLogin' })) {
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <form id="formLogin" name="formLogin" class="navbar-form navbar-right" role="form" action="@Url.Action("Login", "Home")" method="post">
+            <div class="form-group">
+            <input id="Username" name="Username" class="form-control" type="text" placeholder="Username" data-validate="required">
+            </div>
+            <div class="form-group">
+            <input id="Password" name="Password" class="form-control" type="password" placeholder="Password" data-validate="required">
+            </div>
+            <button type="submit" class="btn btn-default">Login</button>
+        </form>
+    </text>
+} else {
+    <text>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" onclick="alert('Hello!!!');return false;">Logged in as <b>@Session["PCRME_Name"].ToString()</b></a></li>
+            <li>@Html.ActionLink("Log out", "Logout", "Home")</li>
+        </ul>
+    </text>
+}*@
+@if (Session["PCRME_Auth"] == null)
+{
+    <text>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#formLogin").submit(function () {
+                    if (!$.validate({ form: 'formLogin' })) {
+                        return false;
+                    }
+                });
+            });
+        </script>
+        <form id="formLogin" name="formLogin" class="navbar-form pull-right" action="@Url.Action("Login", "Home")" method="post">
+            <input id="Username" name="Username" class="input-small" type="text" placeholder="Username" data-validate="required">
+            <input id="Password" name="Password" class="input-small" type="password" placeholder="Password" data-validate="required">
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </text>
+} else {
+    <text>
+        <li><a href="#" onclick="alert('Hello!!!');return false;">Logged in as <b>@Session["PCRME_Name"].ToString()</b></a></li>
+        <li>@Html.ActionLink("Log out", "Logout", "Home")</li>
+  </text>
+}
+

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RunNumberCenterModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="RunNumberCenterEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="TD_RunNumber" EntityType="RunNumberCenterModel.TD_RunNumber" />
+    <EntitySet Name="TM_Program" EntityType="RunNumberCenterModel.TM_Program" />
+    <EntitySet Name="TM_ResetCountPoint" EntityType="RunNumberCenterModel.TM_ResetCountPoint" />
+    <AssociationSet Name="FK_TD_RunNumber_TM_Program" Association="RunNumberCenterModel.FK_TD_RunNumber_TM_Program">
+      <End Role="TM_Program" EntitySet="TM_Program" />
+      <End Role="TD_RunNumber" EntitySet="TD_RunNumber" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TM_Program_TM_ResetCountPoint" Association="RunNumberCenterModel.FK_TM_Program_TM_ResetCountPoint">
+      <End Role="TM_ResetCountPoint" EntitySet="TM_ResetCountPoint" />
+      <End Role="TM_Program" EntitySet="TM_Program" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TD_RunNumber">
+    <Key>
+      <PropertyRef Name="ProgramId" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="Month" />
+      <PropertyRef Name="Additional" />
+    </Key>
+    <Property Name="ProgramId" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+    <Property Name="Month" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+    <Property Name="Additional" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="RunningNumber" Type="Int32" Nullable="false" />
+    <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TM_Program" Relationship="RunNumberCenterModel.FK_TD_RunNumber_TM_Program" FromRole="TD_RunNumber" ToRole="TM_Program" />
+  </EntityType>
+  <EntityType Name="TM_Program">
+    <Key>
+      <PropertyRef Name="ProgramId" />
+    </Key>
+    <Property Name="ProgramId" Type="Int32" Nullable="false" />
+    <Property Name="ProgramName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="RunNoPattern" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="YearDigit" Type="Byte" Nullable="false" />
+    <Property Name="RunDigit" Type="Byte" Nullable="false" />
+    <Property Name="ResetCountPoint" Type="Byte" Nullable="false" />
+    <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="InsertBy" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateBy" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="TD_RunNumber" Relationship="RunNumberCenterModel.FK_TD_RunNumber_TM_Program" FromRole="TM_Program" ToRole="TD_RunNumber" />
+    <NavigationProperty Name="TM_ResetCountPoint" Relationship="RunNumberCenterModel.FK_TM_Program_TM_ResetCountPoint" FromRole="TM_Program" ToRole="TM_ResetCountPoint" />
+  </EntityType>
+  <EntityType Name="TM_ResetCountPoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Byte" Nullable="false" />
+    <Property Name="Point" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="PointPattern" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="TM_Program" Relationship="RunNumberCenterModel.FK_TM_Program_TM_ResetCountPoint" FromRole="TM_ResetCountPoint" ToRole="TM_Program" />
+  </EntityType>
+  <Association Name="FK_TD_RunNumber_TM_Program">
+    <End Role="TM_Program" Type="RunNumberCenterModel.TM_Program" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TD_RunNumber" Type="RunNumberCenterModel.TD_RunNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_Program">
+        <PropertyRef Name="ProgramId" />
+      </Principal>
+      <Dependent Role="TD_RunNumber">
+        <PropertyRef Name="ProgramId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TM_Program_TM_ResetCountPoint">
+    <End Role="TM_ResetCountPoint" Type="RunNumberCenterModel.TM_ResetCountPoint" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TM_Program" Type="RunNumberCenterModel.TM_Program" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_ResetCountPoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TM_Program">
+        <PropertyRef Name="ResetCountPoint" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

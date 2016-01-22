@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MvcPCRMatEng.Models.TD_Files>
+
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>File name</th>
+            <th>Upload Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a href="@Url.Content(item.path + item.file_name)" target="_blank">@item.file_name</a></td>
+                <td>@item.upload_dt.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

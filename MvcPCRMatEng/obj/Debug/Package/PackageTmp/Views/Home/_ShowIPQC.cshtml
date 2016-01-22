@@ -1,0 +1,19 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+<style>
+    .thead {
+        font-weight: bold;
+    }
+</style>
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td style="width:350px;" class="thead">IPQC</td>
+    </tr>
+    <tr>
+        <td>@if(Model.ipqc_file != null){
+                <a href="@Url.Content(Model.ipqc_file)" target="_blank">Show</a>
+        }
+        </td>
+    </tr>
+</table>

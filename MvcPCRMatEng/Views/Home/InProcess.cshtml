@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "In Process";
+}
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.strPad = function (i, l, s) {
+            var o = i.toString();
+            if (!s) { s = '0'; }
+            while (o.length < l) { o = s + o; }
+            return o;
+        };
+
+        $('#jTableInProcess').jtable({
+            title: 'In Process',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            //selecting: true, //Enable selecting
+            defaultSorting: 'act_dt', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("InProcessList","Home")'
+            },
+            fields: {
+                group_code: { title: 'GroupCode', list: false },
+                year: { title: 'Year', list: false },
+                run_no: { title: 'Run No.', list: false },
+                pcr_no: {
+                    title: 'PCR No.', width: '15%', sorting: false,
+                    visibility: 'fixed', //This column always will be shown
+                    display: function (data) {
+                        return $('<a href="#" class="ShowDetail" data-gc="' + data.record.group_code + '" data-yr="' + data.record.year + '" data-rn="' + data.record.run_no + '" data-lv="' + data.record.lv_id + '" data-st="' + data.record.status_id + '">PCR-' + data.record.group_code + '-' + data.record.year + '-' + $.strPad(data.record.run_no, 3) + '</a>');
+                    }
+                },
+                change_content: { title: 'Change Content', width: '40%', sorting: false },
+                status_name: { title: 'Status', width: '15%' },
+                lv_name: { title: 'Level', width: '15%' },
+                act_dt: { title: 'Date', width: '15%', type: 'date', displayFormat: 'dd-mm-yy' },
+                lv_id: { list: false },
+                status_id: { list: false }
+            },
+            toolbar: {
+                items: [{
+                    icon: '../Images/Wait-icon.png',
+                    text: 'Waiting for process',
+                    click: function () {
+                        $('#jTableInProcess').jtable('load', { group: 0 });
+                    }
+                }, {
+                    icon: '../Images/Data-List-icon.png',
+                    text: 'All PCR in Group',
+                    click: function () {
+                        $('#jTableInProcess').jtable('load', { group: 1 });
+                    }
+                }]
+            }
+        });
+
+        //Load list from server
+        $('#jTableInProcess').jtable('load');
+
+        $('#dialogDetail').dialog({
+            autoOpen: false,
+            width: 800,//'auto',
+            height: 'auto',
+            modal: true,
+            position: { my: "center top+50", at: "center top", of: window }
+        });
+
+        $(document).on("click", ".ShowDetail", function (event) {
+            var $btn = $(this);
+            generateTabs($btn.attr('data-gc'), $btn.attr('data-yr'), $btn.attr('data-rn'), $btn.attr('data-lv'), $btn.attr('data-st'));
+        });
+
+        @if (TempData["noty"] != null)
+        {
+            <text>noty({
+            text: '@TempData["noty"].ToString()',
+            type: 'warning',
+            layout: 'topCenter',
+            timeout: 6000
+        });
+        </text>
+        }
+
+        function generateTabs(groupcode, year, runno, lv, st) {
+            var htm = '<div id="tabs"><ul>';
+            htm += '<li><a href="@Url.Action("_ShowDetail")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '&lv=' + lv + '&st=' + st + '">Main</a></li>';
+            htm += '<li><a href="@Url.Action("_ShowFiles")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '">Attached File</a></li>';
+            
+            if (st >= 4 && st < 9) {
+                htm += '<li><a href="@Url.Action("_ShowImplement")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                        + '&st=' + st + '&lv=' + lv + '">Implement</a></li>';
+            }
+            @*if (st >= 5) {
+                htm += '<li><a href="@Url.Action("_ShowIPQC")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                        + '&st=' + st + '&lv=' + lv + '">Attach IPQC</a></li>';
+            }*@
+            htm += '<li><a href="@Url.Action("_ShowTransaction")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '">Transaction</a></li>';
+            htm += '</ul></div>';
+
+            $('#dialogDetail').children().remove();
+            $('#dialogDetail').append(htm);
+
+            $("#tabs").tabs();
+
+            $("#dialogDetail").dialog("open");
+        }
+    });
+</script>
+
+<h3>@ViewBag.Title</h3>
+
+<div id="jTableInProcess"></div>
+
+<div id="dialogDetail" title="Detail"></div>

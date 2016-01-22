@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        @if (TempData["noty"] != null)
+        {
+            <text>noty({
+            text: '@TempData["noty"].ToString()',
+            type: 'warning',
+            layout: 'topCenter',
+            timeout: 8000
+        });
+        </text>
+        }
+    });
+</script>
+
+<h3>@ViewBag.Title</h3>

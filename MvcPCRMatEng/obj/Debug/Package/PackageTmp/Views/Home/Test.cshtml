@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+
+<form action="@Url.Action("TestRoot", "Home")" method="post">
+    <input type="text" id="txtEmp" name="txtEmp" placeholder="Emp. Code" />
+    <input type="submit" value="Submit" />
+</form>
+
+@if (TempData["Level"] != null)
+{
+    <text>Level : </text> @TempData["Level"].ToString();
+}
+
+@if (TempData["Org"] != null)
+{
+    <text>Org : </text> @TempData["Org"].ToString();
+}
+
+@if (TempData["Email"] != null)
+{
+    <text>Email : </text> @TempData["Email"].ToString();
+}

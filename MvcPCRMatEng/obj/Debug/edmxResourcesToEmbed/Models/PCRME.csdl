@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PCRMatEngModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PCRMatEngEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="TD_Files" EntityType="PCRMatEngModel.TD_Files" />
+    <EntitySet Name="TD_PCR" EntityType="PCRMatEngModel.TD_PCR" />
+    <EntitySet Name="TD_Transaction" EntityType="PCRMatEngModel.TD_Transaction" />
+    <EntitySet Name="TM_Action" EntityType="PCRMatEngModel.TM_Action" />
+    <EntitySet Name="TM_GroupCode" EntityType="PCRMatEngModel.TM_GroupCode" />
+    <EntitySet Name="TM_Level" EntityType="PCRMatEngModel.TM_Level" />
+    <EntitySet Name="TM_Purpose" EntityType="PCRMatEngModel.TM_Purpose" />
+    <EntitySet Name="TM_Status" EntityType="PCRMatEngModel.TM_Status" />
+    <EntitySet Name="TM_Supervisor" EntityType="PCRMatEngModel.TM_Supervisor" />
+    <EntitySet Name="TM_User" EntityType="PCRMatEngModel.TM_User" />
+    <EntitySet Name="TM_UserType" EntityType="PCRMatEngModel.TM_UserType" />
+    <EntitySet Name="V_Detail_Current" EntityType="PCRMatEngModel.V_Detail_Current" />
+    <AssociationSet Name="FK_TD_Files_TD_PCR" Association="PCRMatEngModel.FK_TD_Files_TD_PCR">
+      <End Role="TD_PCR" EntitySet="TD_PCR" />
+      <End Role="TD_Files" EntitySet="TD_Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_PCR_TM_GroupCode" Association="PCRMatEngModel.FK_TD_PCR_TM_GroupCode">
+      <End Role="TM_GroupCode" EntitySet="TM_GroupCode" />
+      <End Role="TD_PCR" EntitySet="TD_PCR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_PCR_TM_Purpose" Association="PCRMatEngModel.FK_TD_PCR_TM_Purpose">
+      <End Role="TM_Purpose" EntitySet="TM_Purpose" />
+      <End Role="TD_PCR" EntitySet="TD_PCR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_Transaction_TD_PCR" Association="PCRMatEngModel.FK_TD_Transaction_TD_PCR">
+      <End Role="TD_PCR" EntitySet="TD_PCR" />
+      <End Role="TD_Transaction" EntitySet="TD_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_Transaction_TM_Action" Association="PCRMatEngModel.FK_TD_Transaction_TM_Action">
+      <End Role="TM_Action" EntitySet="TM_Action" />
+      <End Role="TD_Transaction" EntitySet="TD_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_Transaction_TM_Level" Association="PCRMatEngModel.FK_TD_Transaction_TM_Level">
+      <End Role="TM_Level" EntitySet="TM_Level" />
+      <End Role="TD_Transaction" EntitySet="TD_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TD_Transaction_TM_Status" Association="PCRMatEngModel.FK_TD_Transaction_TM_Status">
+      <End Role="TM_Status" EntitySet="TM_Status" />
+      <End Role="TD_Transaction" EntitySet="TD_Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TM_User_TM_UserType" Association="PCRMatEngModel.FK_TM_User_TM_UserType">
+      <End Role="TM_UserType" EntitySet="TM_UserType" />
+      <End Role="TM_User" EntitySet="TM_User" />
+    </AssociationSet>
+    <EntitySet Name="V_Supervisor" EntityType="PCRMatEngModel.V_Supervisor" />
+    <EntitySet Name="V_Transaction" EntityType="PCRMatEngModel.V_Transaction" />
+    <EntitySet Name="V_User_Info" EntityType="PCRMatEngModel.V_User_Info" />
+    <EntitySet Name="V_Max_Round" EntityType="PCRMatEngModel.V_Max_Round" />
+    <EntitySet Name="V_Tran" EntityType="PCRMatEngModel.V_Tran" />
+  </EntityContainer>
+  <EntityType Name="TD_Files">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="file_name" />
+    </Key>
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="String" Name="file_name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="path" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="upload_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="upload_dt" Nullable="false" Precision="3" />
+    <NavigationProperty Name="TD_PCR" Relationship="PCRMatEngModel.FK_TD_Files_TD_PCR" FromRole="TD_Files" ToRole="TD_PCR" />
+    <Property Type="DateTime" Name="delete_dt" Precision="3" />
+  </EntityType>
+  <EntityType Name="TD_PCR">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+    </Key>
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="String" Name="compounditem" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="compounditem_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="line" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="purpose_id" Nullable="false" />
+    <Property Type="String" Name="change_content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="reason" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_rank" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_compound" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="imp_dt" Precision="0" />
+    <Property Type="String" Name="start_batch" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TD_Files" Relationship="PCRMatEngModel.FK_TD_Files_TD_PCR" FromRole="TD_PCR" ToRole="TD_Files" />
+    <NavigationProperty Name="TM_GroupCode" Relationship="PCRMatEngModel.FK_TD_PCR_TM_GroupCode" FromRole="TD_PCR" ToRole="TM_GroupCode" />
+    <NavigationProperty Name="TM_Purpose" Relationship="PCRMatEngModel.FK_TD_PCR_TM_Purpose" FromRole="TD_PCR" ToRole="TM_Purpose" />
+    <NavigationProperty Name="TD_Transaction" Relationship="PCRMatEngModel.FK_TD_Transaction_TD_PCR" FromRole="TD_PCR" ToRole="TD_Transaction" />
+    <Property Type="String" Name="start_compound" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="start_compound_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TD_Transaction">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="round_no" />
+      <PropertyRef Name="status_id" />
+      <PropertyRef Name="lv_id" />
+      <PropertyRef Name="org_id" />
+    </Key>
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="Byte" Name="round_no" Nullable="false" />
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+    <Property Type="Int32" Name="org_id" Nullable="false" />
+    <Property Type="Byte" Name="action_id" Nullable="false" />
+    <Property Type="String" Name="actor" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="act_dt" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="active" Nullable="false" />
+    <Property Type="String" Name="comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TD_PCR" Relationship="PCRMatEngModel.FK_TD_Transaction_TD_PCR" FromRole="TD_Transaction" ToRole="TD_PCR" />
+    <NavigationProperty Name="TM_Action" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Action" FromRole="TD_Transaction" ToRole="TM_Action" />
+    <NavigationProperty Name="TM_Level" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Level" FromRole="TD_Transaction" ToRole="TM_Level" />
+    <NavigationProperty Name="TM_Status" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Status" FromRole="TD_Transaction" ToRole="TM_Status" />
+  </EntityType>
+  <EntityType Name="TM_Action">
+    <Key>
+      <PropertyRef Name="action_id" />
+    </Key>
+    <Property Type="Byte" Name="action_id" Nullable="false" />
+    <Property Type="String" Name="action_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TD_Transaction" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Action" FromRole="TM_Action" ToRole="TD_Transaction" />
+  </EntityType>
+  <EntityType Name="TM_GroupCode">
+    <Key>
+      <PropertyRef Name="group_code" />
+    </Key>
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TD_PCR" Relationship="PCRMatEngModel.FK_TD_PCR_TM_GroupCode" FromRole="TM_GroupCode" ToRole="TD_PCR" />
+  </EntityType>
+  <EntityType Name="TM_Level">
+    <Key>
+      <PropertyRef Name="lv_id" />
+    </Key>
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+    <Property Type="String" Name="lv_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="pos_min" Nullable="false" />
+    <Property Type="Byte" Name="pos_max" Nullable="false" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TD_Transaction" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Level" FromRole="TM_Level" ToRole="TD_Transaction" />
+  </EntityType>
+  <EntityType Name="TM_Purpose">
+    <Key>
+      <PropertyRef Name="purpose_id" />
+    </Key>
+    <Property Type="Byte" Name="purpose_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="purpose_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TD_PCR" Relationship="PCRMatEngModel.FK_TD_PCR_TM_Purpose" FromRole="TM_Purpose" ToRole="TD_PCR" />
+  </EntityType>
+  <EntityType Name="TM_Status">
+    <Key>
+      <PropertyRef Name="status_id" />
+    </Key>
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="String" Name="status_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="min_lv" Nullable="false" />
+    <Property Type="Byte" Name="max_lv" Nullable="false" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TD_Transaction" Relationship="PCRMatEngModel.FK_TD_Transaction_TM_Status" FromRole="TM_Status" ToRole="TD_Transaction" />
+  </EntityType>
+  <EntityType Name="TM_Supervisor">
+    <Key>
+      <PropertyRef Name="emp_code" />
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Type="String" Name="emp_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="email_flag" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TM_User">
+    <Key>
+      <PropertyRef Name="emp_code" />
+      <PropertyRef Name="utype_id" />
+    </Key>
+    <Property Type="String" Name="emp_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="utype_id" Nullable="false" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TM_UserType" Relationship="PCRMatEngModel.FK_TM_User_TM_UserType" FromRole="TM_User" ToRole="TM_UserType" />
+  </EntityType>
+  <EntityType Name="TM_UserType">
+    <Key>
+      <PropertyRef Name="utype_id" />
+    </Key>
+    <Property Type="Byte" Name="utype_id" Nullable="false" />
+    <Property Type="String" Name="utype_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="del_flag" Nullable="false" />
+    <NavigationProperty Name="TM_User" Relationship="PCRMatEngModel.FK_TM_User_TM_UserType" FromRole="TM_UserType" ToRole="TM_User" />
+  </EntityType>
+  <EntityType Name="V_Detail_Current">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="purpose_id" />
+      <PropertyRef Name="change_content" />
+      <PropertyRef Name="reason" />
+      <PropertyRef Name="round_no" />
+      <PropertyRef Name="status_id" />
+      <PropertyRef Name="lv_id" />
+      <PropertyRef Name="org_id" />
+      <PropertyRef Name="purpose_name" />
+      <PropertyRef Name="status_name" />
+      <PropertyRef Name="lv_name" />
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="String" Name="compounditem" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="compounditem_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="line" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="purpose_id" Nullable="false" />
+    <Property Type="String" Name="change_content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="reason" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_rank" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_compound" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="imp_dt" Precision="0" />
+    <Property Type="String" Name="start_batch" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ipqc_file" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="round_no" Nullable="false" />
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+    <Property Type="Int32" Name="org_id" Nullable="false" />
+    <Property Type="Byte" Name="action_id" />
+    <Property Type="String" Name="actor" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="act_dt" Precision="3" />
+    <Property Type="String" Name="comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="purpose_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="status_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="lv_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TD_Files_TD_PCR">
+    <End Type="PCRMatEngModel.TD_PCR" Role="TD_PCR" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_Files" Role="TD_Files" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TD_PCR">
+        <PropertyRef Name="group_code" />
+        <PropertyRef Name="year" />
+        <PropertyRef Name="run_no" />
+      </Principal>
+      <Dependent Role="TD_Files">
+        <PropertyRef Name="group_code" />
+        <PropertyRef Name="year" />
+        <PropertyRef Name="run_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_PCR_TM_GroupCode">
+    <End Type="PCRMatEngModel.TM_GroupCode" Role="TM_GroupCode" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_PCR" Role="TD_PCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_GroupCode">
+        <PropertyRef Name="group_code" />
+      </Principal>
+      <Dependent Role="TD_PCR">
+        <PropertyRef Name="group_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_PCR_TM_Purpose">
+    <End Type="PCRMatEngModel.TM_Purpose" Role="TM_Purpose" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_PCR" Role="TD_PCR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_Purpose">
+        <PropertyRef Name="purpose_id" />
+      </Principal>
+      <Dependent Role="TD_PCR">
+        <PropertyRef Name="purpose_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_Transaction_TD_PCR">
+    <End Type="PCRMatEngModel.TD_PCR" Role="TD_PCR" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PCRMatEngModel.TD_Transaction" Role="TD_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TD_PCR">
+        <PropertyRef Name="group_code" />
+        <PropertyRef Name="year" />
+        <PropertyRef Name="run_no" />
+      </Principal>
+      <Dependent Role="TD_Transaction">
+        <PropertyRef Name="group_code" />
+        <PropertyRef Name="year" />
+        <PropertyRef Name="run_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_Transaction_TM_Action">
+    <End Type="PCRMatEngModel.TM_Action" Role="TM_Action" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_Transaction" Role="TD_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_Action">
+        <PropertyRef Name="action_id" />
+      </Principal>
+      <Dependent Role="TD_Transaction">
+        <PropertyRef Name="action_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_Transaction_TM_Level">
+    <End Type="PCRMatEngModel.TM_Level" Role="TM_Level" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_Transaction" Role="TD_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_Level">
+        <PropertyRef Name="lv_id" />
+      </Principal>
+      <Dependent Role="TD_Transaction">
+        <PropertyRef Name="lv_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TD_Transaction_TM_Status">
+    <End Type="PCRMatEngModel.TM_Status" Role="TM_Status" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TD_Transaction" Role="TD_Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_Status">
+        <PropertyRef Name="status_id" />
+      </Principal>
+      <Dependent Role="TD_Transaction">
+        <PropertyRef Name="status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TM_User_TM_UserType">
+    <End Type="PCRMatEngModel.TM_UserType" Role="TM_UserType" Multiplicity="1" />
+    <End Type="PCRMatEngModel.TM_User" Role="TM_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TM_UserType">
+        <PropertyRef Name="utype_id" />
+      </Principal>
+      <Dependent Role="TM_User">
+        <PropertyRef Name="utype_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="V_Supervisor">
+    <Key>
+      <PropertyRef Name="emp_code" />
+      <PropertyRef Name="group_id" />
+      <PropertyRef Name="update_dt" />
+      <PropertyRef Name="update_by" />
+      <PropertyRef Name="email_flag" />
+    </Key>
+    <Property Type="String" Name="emp_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+    <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="update_by" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="email_flag" Nullable="false" />
+    <Property Type="String" Name="emp_fname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_lname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="dept_id" />
+    <Property Type="Int32" Name="plant_id" />
+  </EntityType>
+  <EntityType Name="V_Transaction">
+    <Key>
+      <PropertyRef Name="lv_name" />
+      <PropertyRef Name="action_name" />
+      <PropertyRef Name="status_name" />
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="round_no" />
+      <PropertyRef Name="status_id" />
+      <PropertyRef Name="lv_id" />
+      <PropertyRef Name="org_id" />
+      <PropertyRef Name="action_id" />
+      <PropertyRef Name="act_dt" />
+      <PropertyRef Name="active" />
+    </Key>
+    <Property Type="String" Name="lv_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="action_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_fname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_lname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="status_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="Byte" Name="round_no" Nullable="false" />
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+    <Property Type="Int32" Name="org_id" Nullable="false" />
+    <Property Type="Byte" Name="action_id" Nullable="false" />
+    <Property Type="String" Name="actor" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="act_dt" Nullable="false" Precision="3" />
+    <Property Type="Boolean" Name="active" Nullable="false" />
+    <Property Type="String" Name="comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="V_User_Info">
+    <Key>
+      <PropertyRef Name="emp_code" />
+      <PropertyRef Name="LeafOrgLevel" />
+    </Key>
+    <Property Type="String" Name="emp_code" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="username" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="password" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_fname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_lname" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="emp_position" />
+    <Property Type="String" Name="position_name" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="email" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="plant_id" />
+    <Property Type="String" Name="plant_name" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="dept_id" />
+    <Property Type="String" Name="dept_name" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="group_id" />
+    <Property Type="String" Name="group_name" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="sub_group_id" />
+    <Property Type="String" Name="sub_group" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="emp_status" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="LeafOrganize" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="LeafOrgGroupId" />
+    <Property Type="String" Name="LeafOrgGroup" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="position_level" />
+    <Property Type="Int32" Name="LeafOrgLevel" Nullable="false" />
+    <Property Type="String" Name="ext" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="V_Max_Round">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="status_id" />
+      <PropertyRef Name="lv_id" />
+    </Key>
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="Byte" Name="round1" />
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+  </EntityType>
+  <EntityType Name="V_Tran">
+    <Key>
+      <PropertyRef Name="group_code" />
+      <PropertyRef Name="year" />
+      <PropertyRef Name="run_no" />
+      <PropertyRef Name="status_name" />
+      <PropertyRef Name="lv_name" />
+      <PropertyRef Name="purpose_name" />
+      <PropertyRef Name="action_name" />
+      <PropertyRef Name="purpose_id" />
+      <PropertyRef Name="status_id" />
+      <PropertyRef Name="lv_id" />
+      <PropertyRef Name="action_id" />
+      <PropertyRef Name="act_dt" />
+      <PropertyRef Name="change_content" />
+      <PropertyRef Name="reason" />
+      <PropertyRef Name="active" />
+      <PropertyRef Name="org_id" />
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Type="String" Name="pcr_no" MaxLength="21" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="group_code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="year" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="run_no" Nullable="false" />
+    <Property Type="String" Name="status_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="lv_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="purpose_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="action_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="purpose_id" Nullable="false" />
+    <Property Type="Byte" Name="status_id" Nullable="false" />
+    <Property Type="Byte" Name="lv_id" Nullable="false" />
+    <Property Type="Byte" Name="action_id" Nullable="false" />
+    <Property Type="String" Name="actor" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="act_dt" Nullable="false" Precision="3" />
+    <Property Type="String" Name="change_content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="reason" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="active" Nullable="false" />
+    <Property Type="Int32" Name="org_id" Nullable="false" />
+    <Property Type="Int32" Name="group_id" Nullable="false" />
+    <Property Type="String" Name="ipqc_rank" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="compounditem" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="line" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="imp_dt" Precision="0" />
+    <Property Type="String" Name="start_batch" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="start_compound" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

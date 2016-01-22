@@ -1,0 +1,140 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TD_PCR</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.group_code, "TM_GroupCode")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("group_code", String.Empty)
+            @Html.ValidationMessageFor(model => model.group_code)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.year)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.year)
+            @Html.ValidationMessageFor(model => model.year)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.run_no)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.run_no)
+            @Html.ValidationMessageFor(model => model.run_no)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.compounditem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.compounditem)
+            @Html.ValidationMessageFor(model => model.compounditem)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.compounditem_file)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.compounditem_file)
+            @Html.ValidationMessageFor(model => model.compounditem_file)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.line)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.line)
+            @Html.ValidationMessageFor(model => model.line)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.purpose_id, "TM_Purpose")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("purpose_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.purpose_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.change_content)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.change_content)
+            @Html.ValidationMessageFor(model => model.change_content)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.reason)
+            @Html.ValidationMessageFor(model => model.reason)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ipqc_rank)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ipqc_rank)
+            @Html.ValidationMessageFor(model => model.ipqc_rank)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ipqc_compound)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ipqc_compound)
+            @Html.ValidationMessageFor(model => model.ipqc_compound)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.imp_dt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.imp_dt)
+            @Html.ValidationMessageFor(model => model.imp_dt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.start_batch)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.start_batch)
+            @Html.ValidationMessageFor(model => model.start_batch)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ipqc_file)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ipqc_file)
+            @Html.ValidationMessageFor(model => model.ipqc_file)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

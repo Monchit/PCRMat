@@ -1,0 +1,68 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+<style>
+    .thead {
+        font-weight: bold;
+    }
+</style>
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td style="width:350px;" class="thead">PCR No.</td>
+        <td class="thead">Change content</td>
+    </tr>
+    <tr>
+        <td>PCR-@Model.group_code-@Model.year-@Model.run_no.ToString("000")</td>
+        <td rowspan="3">@Html.DisplayFor(d => d.change_content)</td>
+    </tr>
+    <tr>
+        <td class="thead">Compound name / Item code</td>
+    </tr>
+    <tr>
+        <td>@if(Model.compounditem_file != null){
+                <a href="@Url.Content(Model.compounditem_file)" target="_blank">View</a>
+            }
+            @Html.DisplayFor(d => d.compounditem)
+        </td>
+    </tr>
+    <tr>
+        <td class="thead">Mixing Line / Bonding Line</td>
+        <td class="thead">Reason</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.line)</td>
+        <td rowspan="3">@Html.DisplayFor(d => d.reason)</td>
+    </tr>
+    <tr>
+        <td class="thead">Purpose</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.TM_Purpose.purpose_name)</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Rank</td>
+        <td class="thead">Issuer</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.ipqc_rank)</td>
+        <td>@ViewBag.Issuer</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Compound name/Item code</td>
+        <td class="thead">Checker</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.ipqc_compound)</td>
+        <td>@ViewBag.Checker</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Attach</td>
+        <td class="thead">Approver</td>
+    </tr>
+    <tr>
+        <td>@if(Model.ipqc_file != null){
+                <a href="@Url.Content(Model.ipqc_file)" target="_blank">View</a>
+        }</td>
+        <td>@ViewBag.Approver</td>
+    </tr>
+</table>

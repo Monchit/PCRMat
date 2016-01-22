@@ -1,0 +1,111 @@
+﻿@model IEnumerable<MvcPCRMatEng.Models.TD_PCR>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TM_GroupCode.group_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.run_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compounditem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.compounditem_file)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.line)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TM_Purpose.purpose_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.change_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipqc_rank)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipqc_compound)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imp_dt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start_batch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ipqc_file)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TM_GroupCode.group_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.run_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compounditem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.compounditem_file)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.line)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TM_Purpose.purpose_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.change_content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipqc_rank)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipqc_compound)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imp_dt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start_batch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ipqc_file)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { groupcode=item.group_code, year=item.year, runno=item.run_no }) |
+            @Html.ActionLink("Details", "Details", new { groupcode=item.group_code, year=item.year, runno=item.run_no }) |
+            @Html.ActionLink("Delete", "Delete", new { groupcode=item.group_code, year=item.year, runno=item.run_no })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "New Process Change";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".lnkDel", function () {
+            $(this).parent().remove();
+            return false;
+        });
+
+        $("#btnAddFile").click(function () {
+            $('#divAttach').append($('<div style="padding: 3px 0px 3px 0px;"><input type="file" name="files" class="file" /> <button type="button" class="lnkDel btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button></div>'));
+        });
+
+        $("#formNew").submit(function () {
+
+            if ($("#txtCompound").val() == '' && $("#fileCompound").val() == '') {
+                $("#txtCompound").removeClass("valid").addClass("error");
+                $("#fileCompound").removeClass("valid").addClass("error");
+                return false;
+            } else {
+                $("#txtCompound").removeClass("error").addClass("valid");
+                $("#fileCompound").removeClass("error").addClass("valid");
+            }
+
+            if (!$.validate({ form: "formNew" })) {
+                return false;
+            }
+            
+            if (confirm("Are you sure you want to submit this document ?")) {
+                document.forms["formNew"].submit();
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+<h3>@ViewBag.Title</h3>
+
+<form id="formNew" name="formNew" class="container-fluid" action="@Url.Action("CreatePCR", "Home")" method="post" enctype="multipart/form-data">
+    <div class="row-fluid">
+        <div class="span8 well">
+            <div class="span5">
+                <label style="color:blue; font-size:large; font-weight:bold;">PCR No. : @ViewBag.Code</label>
+                <label for="txtCompound"><strong>Compound name / Item code</strong> <span class="label label-important">Required</span></label>
+                <input type="text" class="span10" id="txtCompound" name="txtCompound" placeholder="Compound name" maxlength="20" />
+                <br /><input type="file" id="fileCompound" name="fileCompound" class="file" />
+                <label><strong>Mixing Line / Bonding Line</strong></label> 
+                <input type="text" class="span10" id="txtLine" name="txtLine" placeholder="Mixing/Bonding Line" maxlength="20" />
+                <label><strong>Purpose</strong></label> 
+                <select id="selPurpose" name="selPurpose" class="span10" data-validate="required">
+                @foreach (var item in ViewBag.Purpose)
+                {
+                    <option value="@item.purpose_id">@item.purpose_name</option>
+                }
+                </select>
+            </div>
+
+            <div class="span7">
+                <label><strong>Change content</strong> <span class="label label-important">Required</span></label>
+                <textarea id="txaChangecontent" name="txaChangecontent" rows="3" class="span12" data-validate="required"></textarea>
+                <label><strong>Reason</strong> <span class="label label-important">Required</span></label>
+                <textarea id="txaReason" name="txaReason" rows="3" class="span12" data-validate="required"></textarea>
+            </div>
+        </div>
+
+        <div class="span4 well">
+            <label><strong>Attached Document/report</strong> <button id="btnAddFile" type="button" class="btn btn-info"><i class="icon-plus icon-white"></i> Add File</button></label>
+            <div id="divAttach">
+                <div style="padding: 3px 0px 3px 0px;"><input type="file" name="files" class="file" /></div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary">Submit by @Session["PCRME_Name"].ToString()</button>
+    </div>
+</form>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Group Code";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableGCode').jtable({
+            title: 'Group Code Master',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'group_id', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("GCodeList","Master")',
+                @*deleteAction: '@Url.Action("DeleteGCode","Master")',*@
+                updateAction: '@Url.Action("UpdateGCode","Master")',
+                createAction: '@Url.Action("CreateGCode","Master")'
+            },
+            fields: {
+                group_id: { title: 'Group', key: true, create: true, edit: false, width: '55%', options: '@Url.Action("GetTNCGroupList","Master")' },
+                group_code: { title: 'Code', create: true, edit: true, width: '30%' },
+                del_flag: { title: 'Status', create: false, edit: true, width: '15%', options: { 0: 'Active', 1: 'Inactive' } }
+            }
+        });
+        //Load student list from server
+        $('#jTableGCode').jtable('load');
+
+    });
+</script>
+
+<div id="jTableGCode"></div>

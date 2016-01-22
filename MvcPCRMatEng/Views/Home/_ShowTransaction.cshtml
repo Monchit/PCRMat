@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MvcPCRMatEng.Models.V_Transaction>
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Status</th>
+        <th>Judgement</th>
+        <th>Date</th>
+        <th>Comment</th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.emp_fname)</td>
+            <td>@Html.DisplayFor(modelItem => item.lv_name)</td>
+            <td>@Html.DisplayFor(modelItem => item.status_name)</td>
+            <td>@Html.DisplayFor(modelItem => item.action_name)</td>
+            <td>@item.act_dt.ToString("dd/MM/yyyy")</td>
+            <td>@Html.DisplayFor(modelItem => item.comment)</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,113 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TD_PCR</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TM_GroupCode.update_by)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TM_GroupCode.update_by)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.year)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.run_no)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.run_no)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.compounditem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.compounditem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.compounditem_file)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.compounditem_file)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.line)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.line)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TM_Purpose.purpose_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TM_Purpose.purpose_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.change_content)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.change_content)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.reason)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reason)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_rank)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_rank)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_compound)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_compound)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.imp_dt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.imp_dt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.start_batch)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.start_batch)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_file)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_file)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { groupcode=Model.group_code, year=Model.year, runno=Model.run_no }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

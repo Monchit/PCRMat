@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PCRMatEngModelStoreContainer" CdmEntityContainer="PCRMatEngEntities">
+    <EntitySetMapping Name="TD_Files">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TD_Files">
+        <MappingFragment StoreEntitySet="TD_Files">
+          <ScalarProperty Name="delete_dt" ColumnName="delete_dt" />
+          <ScalarProperty Name="upload_dt" ColumnName="upload_dt" />
+          <ScalarProperty Name="upload_by" ColumnName="upload_by" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="file_name" ColumnName="file_name" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TD_PCR">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TD_PCR">
+        <MappingFragment StoreEntitySet="TD_PCR">
+          <ScalarProperty Name="start_compound_file" ColumnName="start_compound_file" />
+          <ScalarProperty Name="start_compound" ColumnName="start_compound" />
+          <ScalarProperty Name="ipqc_file" ColumnName="ipqc_file" />
+          <ScalarProperty Name="start_batch" ColumnName="start_batch" />
+          <ScalarProperty Name="imp_dt" ColumnName="imp_dt" />
+          <ScalarProperty Name="ipqc_compound" ColumnName="ipqc_compound" />
+          <ScalarProperty Name="ipqc_rank" ColumnName="ipqc_rank" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="change_content" ColumnName="change_content" />
+          <ScalarProperty Name="purpose_id" ColumnName="purpose_id" />
+          <ScalarProperty Name="line" ColumnName="line" />
+          <ScalarProperty Name="compounditem_file" ColumnName="compounditem_file" />
+          <ScalarProperty Name="compounditem" ColumnName="compounditem" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TD_Transaction">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TD_Transaction">
+        <MappingFragment StoreEntitySet="TD_Transaction">
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="act_dt" ColumnName="act_dt" />
+          <ScalarProperty Name="actor" ColumnName="actor" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="org_id" ColumnName="org_id" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="round_no" ColumnName="round_no" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_Action">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_Action">
+        <MappingFragment StoreEntitySet="TM_Action">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_GroupCode">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_GroupCode">
+        <MappingFragment StoreEntitySet="TM_GroupCode">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_Level">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_Level">
+        <MappingFragment StoreEntitySet="TM_Level">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="pos_max" ColumnName="pos_max" />
+          <ScalarProperty Name="pos_min" ColumnName="pos_min" />
+          <ScalarProperty Name="lv_name" ColumnName="lv_name" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_Purpose">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_Purpose">
+        <MappingFragment StoreEntitySet="TM_Purpose">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="purpose_name" ColumnName="purpose_name" />
+          <ScalarProperty Name="purpose_id" ColumnName="purpose_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_Status">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_Status">
+        <MappingFragment StoreEntitySet="TM_Status">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="max_lv" ColumnName="max_lv" />
+          <ScalarProperty Name="min_lv" ColumnName="min_lv" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_Supervisor">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_Supervisor">
+        <MappingFragment StoreEntitySet="TM_Supervisor">
+          <ScalarProperty Name="email_flag" ColumnName="email_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="emp_code" ColumnName="emp_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_User">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_User">
+        <MappingFragment StoreEntitySet="TM_User">
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="utype_id" ColumnName="utype_id" />
+          <ScalarProperty Name="emp_code" ColumnName="emp_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM_UserType">
+      <EntityTypeMapping TypeName="PCRMatEngModel.TM_UserType">
+        <MappingFragment StoreEntitySet="TM_UserType">
+          <ScalarProperty Name="del_flag" ColumnName="del_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="utype_name" ColumnName="utype_name" />
+          <ScalarProperty Name="utype_id" ColumnName="utype_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Detail_Current">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_Detail_Current">
+        <MappingFragment StoreEntitySet="V_Detail_Current">
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="lv_name" ColumnName="lv_name" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+          <ScalarProperty Name="purpose_name" ColumnName="purpose_name" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="act_dt" ColumnName="act_dt" />
+          <ScalarProperty Name="actor" ColumnName="actor" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="org_id" ColumnName="org_id" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="round_no" ColumnName="round_no" />
+          <ScalarProperty Name="ipqc_file" ColumnName="ipqc_file" />
+          <ScalarProperty Name="start_batch" ColumnName="start_batch" />
+          <ScalarProperty Name="imp_dt" ColumnName="imp_dt" />
+          <ScalarProperty Name="ipqc_compound" ColumnName="ipqc_compound" />
+          <ScalarProperty Name="ipqc_rank" ColumnName="ipqc_rank" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="change_content" ColumnName="change_content" />
+          <ScalarProperty Name="purpose_id" ColumnName="purpose_id" />
+          <ScalarProperty Name="line" ColumnName="line" />
+          <ScalarProperty Name="compounditem_file" ColumnName="compounditem_file" />
+          <ScalarProperty Name="compounditem" ColumnName="compounditem" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Supervisor">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_Supervisor">
+        <MappingFragment StoreEntitySet="V_Supervisor">
+          <ScalarProperty Name="plant_id" ColumnName="plant_id" />
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+          <ScalarProperty Name="emp_fname" ColumnName="emp_fname" />
+          <ScalarProperty Name="email_flag" ColumnName="email_flag" />
+          <ScalarProperty Name="update_by" ColumnName="update_by" />
+          <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="emp_code" ColumnName="emp_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Transaction">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_Transaction">
+        <MappingFragment StoreEntitySet="V_Transaction">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="act_dt" ColumnName="act_dt" />
+          <ScalarProperty Name="actor" ColumnName="actor" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="org_id" ColumnName="org_id" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="round_no" ColumnName="round_no" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+          <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+          <ScalarProperty Name="emp_fname" ColumnName="emp_fname" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="lv_name" ColumnName="lv_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_User_Info">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_User_Info">
+        <MappingFragment StoreEntitySet="V_User_Info">
+          <ScalarProperty Name="ext" ColumnName="ext" />
+          <ScalarProperty Name="LeafOrgLevel" ColumnName="LeafOrgLevel" />
+          <ScalarProperty Name="position_level" ColumnName="position_level" />
+          <ScalarProperty Name="LeafOrgGroup" ColumnName="LeafOrgGroup" />
+          <ScalarProperty Name="LeafOrgGroupId" ColumnName="LeafOrgGroupId" />
+          <ScalarProperty Name="LeafOrganize" ColumnName="LeafOrganize" />
+          <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+          <ScalarProperty Name="sub_group" ColumnName="sub_group" />
+          <ScalarProperty Name="sub_group_id" ColumnName="sub_group_id" />
+          <ScalarProperty Name="group_name" ColumnName="group_name" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="dept_name" ColumnName="dept_name" />
+          <ScalarProperty Name="dept_id" ColumnName="dept_id" />
+          <ScalarProperty Name="plant_name" ColumnName="plant_name" />
+          <ScalarProperty Name="plant_id" ColumnName="plant_id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="position_name" ColumnName="position_name" />
+          <ScalarProperty Name="emp_position" ColumnName="emp_position" />
+          <ScalarProperty Name="emp_lname" ColumnName="emp_lname" />
+          <ScalarProperty Name="emp_fname" ColumnName="emp_fname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="emp_code" ColumnName="emp_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Max_Round">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_Max_Round">
+        <MappingFragment StoreEntitySet="V_Max_Round">
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="round1" ColumnName="round1" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Tran">
+      <EntityTypeMapping TypeName="PCRMatEngModel.V_Tran">
+        <MappingFragment StoreEntitySet="V_Tran">
+          <ScalarProperty Name="start_compound" ColumnName="start_compound" />
+          <ScalarProperty Name="start_batch" ColumnName="start_batch" />
+          <ScalarProperty Name="imp_dt" ColumnName="imp_dt" />
+          <ScalarProperty Name="line" ColumnName="line" />
+          <ScalarProperty Name="compounditem" ColumnName="compounditem" />
+          <ScalarProperty Name="ipqc_rank" ColumnName="ipqc_rank" />
+          <ScalarProperty Name="group_id" ColumnName="group_id" />
+          <ScalarProperty Name="org_id" ColumnName="org_id" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="change_content" ColumnName="change_content" />
+          <ScalarProperty Name="act_dt" ColumnName="act_dt" />
+          <ScalarProperty Name="actor" ColumnName="actor" />
+          <ScalarProperty Name="action_id" ColumnName="action_id" />
+          <ScalarProperty Name="lv_id" ColumnName="lv_id" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="purpose_id" ColumnName="purpose_id" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="purpose_name" ColumnName="purpose_name" />
+          <ScalarProperty Name="lv_name" ColumnName="lv_name" />
+          <ScalarProperty Name="status_name" ColumnName="status_name" />
+          <ScalarProperty Name="run_no" ColumnName="run_no" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="group_code" ColumnName="group_code" />
+          <ScalarProperty Name="pcr_no" ColumnName="pcr_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

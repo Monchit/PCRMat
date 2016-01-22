@@ -1,0 +1,110 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<style>
+    .thead {
+        font-weight: bold;
+    }
+</style>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        
+    });
+</script>*@
+
+<table class="table table-bordered table-striped table-condensed">
+    <tr>
+        <td style="width:350px;" class="thead">PCR No.</td>
+        <td class="thead">Change content</td>
+    </tr>
+    <tr>
+        <td>PCR-@Model.group_code-@Model.year-@Model.run_no.ToString("000")</td>
+        <td rowspan="3">@Html.DisplayFor(d => d.change_content)</td>
+    </tr>
+    <tr>
+        <td class="thead">Compound name / Item code</td>
+    </tr>
+    <tr>
+        <td>@if(Model.compounditem_file != null){
+                <a href="@Url.Content(Model.compounditem_file)" target="_blank">View</a>
+            }
+            @Html.DisplayFor(d => d.compounditem)
+        </td>
+    </tr>
+    <tr>
+        <td class="thead">Mixing Line / Bonding Line</td>
+        <td class="thead">Reason</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.line)</td>
+        <td rowspan="3">@Html.DisplayFor(d => d.reason)</td>
+    </tr>
+    <tr>
+        <td class="thead">Purpose</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.purpose_name)</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Rank</td>
+        <td class="thead">Issuer</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.ipqc_rank)</td>
+        <td>@ViewBag.Issuer</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Compound name/Item code</td>
+        <td class="thead">Checker</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(d => d.ipqc_compound)</td>
+        <td>@ViewBag.Checker</td>
+    </tr>
+    <tr>
+        <td class="thead">IPQC Attach</td>
+        <td class="thead">Approver</td>
+    </tr>
+    <tr>
+        <td>@if(Model.ipqc_file != null){
+                <a href="@Url.Content(Model.ipqc_file)" target="_blank">View</a>
+        }</td>
+        <td>@ViewBag.Approver</td>
+    </tr>
+</table>
+
+<div id="dialogApprove"></div>
+
+@if (ViewBag.FormApprove != null)
+{
+    if (@ViewBag.FormApprove == 1)//Eng.
+    {
+        <a href="@Url.Action("Edit_PCR", "Home", new { groupcode = Model.group_code, year = Model.year, runno = Model.run_no })" class="btn btn-info">Edit PCR</a>
+    }
+    else if (ViewBag.FormApprove == 2)//Sup.
+    {
+        @Html.Partial("_FormAddIPQC", Model)
+        @Html.Partial("_FormReturn", Model)
+    }
+    else if (ViewBag.FormApprove == 3)//Mgr.
+    {
+        @Html.Partial("_FormApprove", Model)
+        @Html.Partial("_FormReturn", Model)
+    }
+    else if (ViewBag.FormApprove == 4)//Dept.
+    {
+        @Html.Partial("_FormApprove", Model)
+    }
+    else if (ViewBag.FormApprove == 5)//Plant/Div.
+    {
+        @Html.Partial("_FormApprove", Model)
+    }
+    else if (ViewBag.FormApprove == 11)//Implement
+    {
+        @Html.Partial("_FormImplement", Model)
+    }
+    else if (ViewBag.FormApprove == 12)//Attach IPQC
+    {
+        @Html.Partial("_FormAttachIPQC", Model)
+    }
+}

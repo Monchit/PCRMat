@@ -1,0 +1,52 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Datepicker Setting
+        $(".datepicker").datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: new Date()//set minDate is today
+        });
+
+        $("#formImp").submit(function () {
+            if ($("#txtCompound").val() == '' && $("#fileCompound").val() == '') {
+                $("#txtCompound").removeClass("valid").addClass("error");
+                $("#fileCompound").removeClass("valid").addClass("error");
+                return false;
+            } else {
+                $("#txtCompound").removeClass("error").addClass("valid");
+                $("#fileCompound").removeClass("error").addClass("valid");
+            }
+
+            if (!$.validate({ form: "formImp" })) {
+                return false;
+            }
+            if (confirm("Are you sure you want to Submit ?")) {
+                //document.forms["formApprove"].submit();
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<form id="formImp" name="formImp" action="@Url.Action("AddImplement", "Home")" method="post" class="row-fluid" enctype="multipart/form-data">
+    <label><strong>Implement Date</strong></label>
+    <input type="text" class="datepicker" id="dtImp" name="dtImp" readonly="true" placeholder="dd-mm-yyyy" data-validate="required" />
+
+    <label><strong>Compound name / Item code</strong></label>
+    <div class="form-inline">
+    <input type="text" id="txtCompound" name="txtCompound" maxlength="20" />
+    <input type="file" id="fileCompound" name="fileCompound" class="file" /></div>
+
+    <label><strong>Start Batch No.</strong></label>
+    <input type="text" id="txtBatch" name="txtBatch" class="" maxlength="20" placeholder="Start Batch No." data-validate="required" />
+
+    <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+    <input type="hidden" value="@Model.status_id" id="hdST" name="hdST" />
+
+    <p><button type="submit" class="btn btn-primary">Submit</button></p>
+</form>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Purpose";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTablePurpose').jtable({
+            title: 'Purpose Master',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'purpose_id', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("PurposeList","Master")',
+                @*deleteAction: '@Url.Action("DeletePurpose","Master")',*@
+                updateAction: '@Url.Action("UpdatePurpose","Master")',
+                createAction: '@Url.Action("CreatePurpose","Master")'
+            },
+            fields: {
+                purpose_id: { title: 'ID', key: true, create: false, edit: false, width: '10%' },
+                purpose_name: { title: 'Purpose Name', create: true, edit: true, width: '75%' },
+                del_flag: { title: 'Status', create: false, edit: true, width: '15%', options: { 0: 'Active', 1: 'Inactive' } }
+            }
+        });
+        //Load student list from server
+        $('#jTablePurpose').jtable('load');
+
+    });
+</script>
+
+<div id="jTablePurpose"></div>

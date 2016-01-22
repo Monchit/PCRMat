@@ -1,0 +1,45 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#formIPQC").submit(function () {
+            if (!$.validate({ form: "formIPQC" })) {
+                return false;
+            }
+            if (confirm("Are you sure you want to Approve ?")) {
+                //document.forms["formIPQC"].submit();
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<form id="formIPQC" name="formIPQC" action="@Url.Action("AddIPQC", "Home")" method="post">
+    <label><strong>IPQC Rank</strong></label>
+    <select id="selIPQC" name="selIPQC" class="input-medium" data-validate="required">
+        @if (Model.ipqc_rank != null)
+        {
+            <option value="@Model.ipqc_rank">@Model.ipqc_rank</option>
+        }
+        <option value="">-Select Rank-</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="No">No</option>
+    </select>
+       
+    <label><strong>IPQC Compound name/Item code</strong></label>
+    <input type="text" class="span5" id="txtIPQCCP" name="txtIPQCCP" placeholder="IPQC Compound name" maxlength="50"  data-validate="required" value="@Model.ipqc_compound" />
+    <p><button type="submit" class="btn btn-success">Approve</button></p>
+
+    @*<input type="hidden" value="@ViewBag.GC" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@ViewBag.YY" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@ViewBag.RN" id="hdRN" name="hdRN" />*@
+
+    <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+    
+</form>

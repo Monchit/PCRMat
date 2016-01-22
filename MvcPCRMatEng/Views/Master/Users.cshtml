@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "User";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableUser').jtable({
+            title: 'User Master',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'utype_id', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("UserList","Master")',
+                @*deleteAction: '@Url.Action("DeleteUser","Master")',
+                updateAction: '@Url.Action("UpdateUser","Master")',*@
+                createAction: '@Url.Action("CreateUser","Master")'
+            },
+            fields: {
+                emp_code: { title: 'Name', key: true, create: true, edit: false, width: '50%', options: '@Url.Action("GetTNCUserList","Master")' },
+                utype_id: { title: 'User Type', key: true, create: true, edit: false, width: '25%', options: '@Url.Action("GetUTypeList","Master")' },
+                update_dt: { title: 'Update Date', create: false, edit: false, width: '20%', type: 'date', displayFormat: 'dd-mm-yy' },
+                btnDelete: {
+                    title: '',
+                    width: '2%', create: false, edit: false, sorting: false,
+                    display: function (data) {
+                        return $('<button type="button" class="btn btn-mini UDel" data-emp="' + data.record.emp_code + '" data-utype="' + data.record.utype_id + '"><i class="icon-trash"></i></a>');
+                    }
+                }
+            }
+        });
+        //Load student list from server
+        $('#jTableUser').jtable('load');
+
+        $(document).on("click", ".UDel", function (event) {
+            var obj = new Object();
+            obj.emp_code = $(this).attr("data-emp");
+            obj.utype_id = $(this).attr("data-utype");
+            if (confirm("Are you sure to Delete ?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteUser","Master")",
+                    data: obj,
+                    dataType: "json",
+                    success: function (data) {
+                        $('#jTableUser').jtable('reload');
+                    },
+                    error: function (request, status, err) {
+                        alert("Request:" + request + ", Status:" + status + ", Error:" + err);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+
+<div id="jTableUser"></div>

@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "New Process Change";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".lnkDel", function () {
+            $(this).parent().remove();
+            return false;
+        });
+        $("#btnAddFile").click(function () {
+            $('#divAttach').last().after($('<div style="padding: 5px 0px 5px 0px;"><input type="file" name="files" class="file" /> <button type="button" class="lnkDel btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button></div>'));
+        });
+
+        $("#formNew").submit(function () {
+
+            if ($("#txtCompound").val() == '' && $("#fileCompound").val() == '') {
+                $("#txtCompound").removeClass("valid").addClass("error");
+                $("#fileCompound").removeClass("valid").addClass("error");
+                return false;
+            } else {
+                $("#txtCompound").removeClass("error").addClass("valid");
+                $("#fileCompound").removeClass("error").addClass("valid");
+            }
+
+            if (!$.validate({ form: "formNew" })) {
+                return false;
+            }
+            
+            if (confirm("Are you sure you want to submit this document ?")) {
+                document.forms["formNew"].submit();
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<h3>@ViewBag.Title</h3>
+
+
+
+<form id="formNew" name="formNew" class="form-horizontal" action="@Url.Action("CreatePCR", "Home")" method="post" enctype="multipart/form-data">
+    <div class="control-group">
+        <label class="control-label" for="txtPCRNo">PCR No. :</label>
+        <div class="controls">
+            <input type="text" class="span3" id="txtPCRNo" name="txtPCRNo" value="@ViewBag.Code" disabled="disabled" data-validate="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="txtCompound">Compound name / Item code : </label>
+        <div class="controls">
+            <input type="text" class="span3" id="txtCompound" name="txtCompound" placeholder="Compound name" maxlength="20" />
+            <input type="file" id="fileCompound" name="fileCompound" class="file" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="txtLine">Mixing Line / Bonding Line :</label>
+        <div class="controls">
+            <input type="text" class="span3" id="txtLine" name="txtLine" placeholder="Mixing/Bonding Line" maxlength="20" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="selPurpose">Purpose :</label>
+        <div class="controls">
+            <select id="selPurpose" name="selPurpose" class="span3" data-validate="required">
+                @*<option value="0">--Select Purpose--</option>*@
+                @foreach (var item in ViewBag.Purpose)
+                {
+                    <option value="@item.purpose_id">@item.purpose_name</option>
+                }
+            </select>
+            <i class="icon-warning-sign"></i>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="txaChangecontent">Change content :</label>
+        <div class="controls">
+            <textarea id="txaChangecontent" name="txaChangecontent" rows="3" class="span6" data-validate="required"></textarea>
+            <i class="icon-warning-sign"></i>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="txaChangecontent">Reason :</label>
+        <div class="controls">
+            <textarea id="txaReason" name="txaReason" rows="3" class="span6" data-validate="required"></textarea>
+            <i class="icon-warning-sign"></i>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="flAtt">Attached Document/report : <br />
+            <button id="btnAddFile" type="button" class="btn btn-info"><i class="icon-plus icon-white"></i> Add Attach File</button></label>
+        <div class="controls">
+            
+            <div id="divAttach">
+                <div style="padding: 3px 0px 3px 0px;"><input type="file" name="files" class="file" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">Submit by @Session["PCRME_Name"].ToString()</button>
+        </div>
+    </div>
+</form>

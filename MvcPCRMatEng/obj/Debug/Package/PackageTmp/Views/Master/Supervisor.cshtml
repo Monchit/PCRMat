@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Supervisor";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableSup').jtable({
+            title: 'Supervisor Master',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'group_id', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("SupList","Master")',
+                @*deleteAction: '@Url.Action("DeleteSup","Master")',*@
+                updateAction: '@Url.Action("UpdateSup","Master")',
+                createAction: '@Url.Action("CreateSup","Master")'
+            },
+            fields: {
+                emp_code: { title: 'User', key: true, create: true, edit: false, width: '50%', options: '@Url.Action("GetTNCUserList","Master")' },
+                group_id: { title: 'Group', key: true, create: true, edit: false, width: '25%', options: '@Url.Action("GetInternalGroupList","Master")' },
+                email_flag: { title: 'Receive Email', create: true, edit: true, width: '15%', options: { 0: 'No', 1: 'Yes' } },
+                update_dt: { title: 'Update Date', create: false, edit: false, width: '20%', type: 'date', displayFormat: 'dd-mm-yy' },
+                btnDelete: {
+                    title: '',
+                    width: '2%', create: false, edit: false, sorting: false,
+                    display: function (data) {
+                        return $('<button type="button" class="btn btn-mini UDel" data-emp="' + data.record.emp_code + '" data-group="' + data.record.group_id + '"><i class="icon-trash"></i></a>');
+                    }
+                }
+            }
+        });
+        //Load student list from server
+        $('#jTableSup').jtable('load');
+
+        $(document).on("click", ".UDel", function (event) {
+            var obj = new Object();
+            obj.emp_code = $(this).attr("data-emp");
+            obj.group_id = $(this).attr("data-group");
+            if (confirm("Are you sure to Delete ?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteSup","Master")",
+                    data: obj,
+                    dataType: "json",
+                    success: function (data) {
+                        $('#jTableSup').jtable('reload');
+                    },
+                    error: function (request, status, err) {
+                        alert("Request:" + request + ", Status:" + status + ", Error:" + err);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+
+<div id="jTableSup"></div>

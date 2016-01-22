@@ -1,0 +1,117 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>TD_PCR</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TM_GroupCode.update_by)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TM_GroupCode.update_by)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.year)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.year)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.run_no)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.run_no)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.compounditem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.compounditem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.compounditem_file)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.compounditem_file)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.line)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.line)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TM_Purpose.purpose_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TM_Purpose.purpose_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.change_content)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.change_content)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.reason)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.reason)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_rank)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_rank)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_compound)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_compound)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.imp_dt)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.imp_dt)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.start_batch)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.start_batch)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ipqc_file)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ipqc_file)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

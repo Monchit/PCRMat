@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+@model MvcPCRMatEng.Models.TD_PCR
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>PCR Detail Export</title>
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+        @*<style type="text/css">
+            .td_title {
+                text-align:right !important;
+                font-weight:600;
+            }
+        </style>*@
+    </head>
+    <body>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>PCR Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width:200px;">PCR NO. :</td>
+                    <td style="font-weight:600;">PCR-@Model.group_code-@Model.year-@Model.run_no.ToString("000")</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>Compound name / Item code :</td>
+                    <td>@Html.DisplayFor(d => d.compounditem)</td>
+                    <td style="width:100px;">Purpose :</td>
+                    <td>@Html.DisplayFor(d => d.TM_Purpose.purpose_name)</td>
+                </tr>
+                <tr>
+                    <td>Mixing Line / Bonding Line :</td>
+                    <td>@Html.DisplayFor(d => d.line)</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>Change content :</td>
+                    <td colspan="3">@Html.DisplayFor(d => d.change_content)</td>
+                </tr>
+                <tr>
+                    <td>Reason :</td>
+                    <td colspan="3">@Html.DisplayFor(d => d.reason)</td>
+                </tr>
+                @*<tr>
+                    <td>Issuer :</td>
+                    <td>@ViewBag.Issuer</td>
+                    <td>Issue Date:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Checked by :</td>
+                    <td>@ViewBag.Checker</td>
+                    <td>Check date:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Approved by :</td>
+                    <td>@ViewBag.Approver1</td>
+                    <td>Approve date:</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Approved by :</td>
+                    <td>@ViewBag.Approver2</td>
+                    <td>Approve date:</td>
+                    <td></td>
+                </tr>*@
+                <tr>
+                    <td>Implement Date :</td>
+                    <td>@Model.imp_dt.Value.ToString("dd/MM/yyyy")</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>First Batch/Lot no.:</td>
+                    <td>@Html.DisplayFor(d => d.start_batch)</td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>IPQC Rank :</td>
+                    <td>@Html.DisplayFor(d => d.ipqc_rank)</td>
+                    <td colspan="2"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Issued by</th>
+                    <th>Checked by</th>
+                    <th>Approved by</th>
+                    <th>Approved by</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@ViewBag.P1</td>
+                    <td>@ViewBag.P2</td>
+                    <td>@ViewBag.P3</td>
+                    <td>@ViewBag.P4</td>
+                </tr>
+                <tr>
+                    <td>@ViewBag.D1</td>
+                    <td>@ViewBag.D2</td>
+                    <td>@ViewBag.D3</td>
+                    <td>@ViewBag.D4</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

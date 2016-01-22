@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b67005952d04a3eb1894d25aa24006e" Name="Diagram1">
+        <EntityTypeShape EntityType="PCRMatEngModel.TD_Files" Width="1.5" PointX="5.375" PointY="13.125" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TD_PCR" Width="1.5" PointX="3.1612261101422954" PointY="10.474819069018038" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TD_Transaction" Width="1.5" PointX="0.75" PointY="19.25" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_Action" Width="1.5" PointX="1" PointY="13.875" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_GroupCode" Width="1.5" PointX="2" PointY="16.5" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_Level" Width="1.5" PointX="7.5" PointY="10.5" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_Purpose" Width="1.5" PointX="5.375" PointY="10.5" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_Status" Width="1.5" PointX="9.5" PointY="10.5" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_Supervisor" Width="1.5" PointX="4.75" PointY="23.625" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_User" Width="1.5" PointX="4.75" PointY="25.875" />
+        <EntityTypeShape EntityType="PCRMatEngModel.TM_UserType" Width="1.5" PointX="7" PointY="25.875" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_Detail_Current" Width="1.5" PointX="2.75" PointY="23.625" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_Files_TD_PCR" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_PCR_TM_GroupCode" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_PCR_TM_Purpose" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_Transaction_TD_PCR" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_Transaction_TM_Action" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_Transaction_TM_Level" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TD_Transaction_TM_Status" />
+        <AssociationConnector Association="PCRMatEngModel.FK_TM_User_TM_UserType" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_Supervisor" Width="1.5" PointX="4.6076563953457663" PointY="7.0293480339596739" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_Transaction" Width="1.5" PointX="1.0109652807055811" PointY="9.0591240418418888" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_User_Info" Width="1.5" PointX="8.75" PointY="13.75" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_Max_Round" Width="1.5" PointX="7" PointY="23.375" />
+        <EntityTypeShape EntityType="PCRMatEngModel.V_Tran" Width="1.5" PointX="0.75" PointY="23.625" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

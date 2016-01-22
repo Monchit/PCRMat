@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Level";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jTableLevel').jtable({
+            title: 'Level Master',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            selecting: true, //Enable selecting
+            defaultSorting: 'lv_id', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("LevelList","Master")',
+                @*deleteAction: '@Url.Action("DeleteLevel","Master")',*@
+                updateAction: '@Url.Action("UpdateLevel","Master")',
+                createAction: '@Url.Action("CreateLevel","Master")'
+            },
+            fields: {
+                lv_id: { title: 'ID', key: true, create: true, edit: false, width: '10%' },
+                lv_name: { title: 'Level Name', create: true, edit: true, width: '45%' },
+                pos_min: { title: 'Position Min', create: true, edit: true, width: '15%' },
+                pos_max: { title: 'Position Max', create: true, edit: true, width: '15%' },
+                del_flag: { title: 'Status', create: false, edit: true, width: '15%', options: { 0: 'Active', 1: 'Inactive' } }
+            }
+        });
+        //Load student list from server
+        $('#jTableLevel').jtable('load');
+
+    });
+</script>
+
+<div id="jTableLevel"></div>

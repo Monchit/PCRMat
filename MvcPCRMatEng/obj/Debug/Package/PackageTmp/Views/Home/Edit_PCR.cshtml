@@ -1,0 +1,160 @@
+﻿@model MvcPCRMatEng.Models.TD_PCR
+
+@{
+    ViewBag.Title = "PCR Detail";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".lnkDel", function () {
+            $(this).parent().remove();
+            return false;
+        });
+
+        $("#btnAddFile").click(function () {
+            $('#divAttach').append($('<div style="padding: 3px 0px 3px 0px;"><input type="file" name="files" class="file" /> <button type="button" class="lnkDel btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button></div>'));
+        });
+
+        $(document).on("click", ".fileDel", function () {
+            if (confirm("Are you sure you want to delete this file ?")) {
+                var x = $(this).next();
+                var y = $(this);
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: '@Url.Action("DeleteFile", "Home")',
+                    data: { groupcode: x.attr('data-gc'), year: x.attr('data-yy'), runno: x.attr('data-rn'), filename: x.attr('data-fn') },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != null && data.success) {
+                            y.parent().remove();
+                            //y.after('<button type="button" class="fileRes btn btn-link"><i class="icon-refresh"></i></button>');
+                            //y.remove();
+                            alert(data.response);
+                        } else {
+                            alert(data.response);
+                        }
+                    },
+                    error: function (data) {
+                        alert("error!");  // 
+                    }
+                });
+            } else {
+                return false;
+            }
+        });
+
+        $(document).on("click", ".fileRes", function () {
+            if (confirm("Are you sure you want to Restore this file ?")) {
+                var x = $(this).next();
+                var y = $(this);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("RestoreFile", "Home")',
+                    data: { groupcode: x.attr('data-gc'), year: x.attr('data-yy'), runno: x.attr('data-rn'), filename: x.attr('data-fn') },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != null && data.success) {
+                            y.after('<button type="button" class="fileDel btn btn-link"><i class="icon-trash"></i></button>');
+                            y.remove();
+                            alert(data.response);
+                        } else {
+                            alert(data.response);
+                        }
+                    },
+                    error: function (data) {
+                        alert("error!");
+                    }
+                });
+            } else {
+                return false;
+            }
+        });
+
+        $("#formEdit").submit(function () {
+
+            if ($("#txtCompound").val() == '' && $("#fileCompound").val() == '') {
+                $("#txtCompound").removeClass("valid").addClass("error");
+                $("#fileCompound").removeClass("valid").addClass("error");
+                return false;
+            } else {
+                $("#txtCompound").removeClass("error").addClass("valid");
+                $("#fileCompound").removeClass("error").addClass("valid");
+            }
+
+            if (!$.validate({ form: "formEdit" })) {
+                return false;
+            }
+            
+            if (confirm("Are you sure you want to submit this document ?")) {
+                document.forms["formEdit"].submit();
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+<h3>@ViewBag.Title</h3>
+
+<form id="formEdit" name="formEdit" class="container-fluid" action="@Url.Action("UpdatePCR", "Home")" method="post" enctype="multipart/form-data">
+    <div class="row-fluid">
+        <div class="span7 well">
+            <div class="span5">
+                <label style="color:blue; font-size:large; font-weight:bold;">PCR No. : @ViewBag.Code</label>
+                <label><strong>Compound name / Item code</strong> <span class="label label-important">Required</span></label>
+                <input type="text" class="span12" id="txtCompound" name="txtCompound" placeholder="Compound name" maxlength="20" value="@Model.compounditem" /><br />
+                @if (Model.compounditem_file != null)
+                {
+                    <a href="@Url.Content(Model.compounditem_file)" target="_blank">View</a>
+                }
+                <input type="file" id="fileCompound" name="fileCompound" class="file" />
+                <label><strong>Mixing Line / Bonding Line</strong></label> <input type="text" class="span12" id="txtLine" name="txtLine" placeholder="Mixing/Bonding Line" maxlength="20" value="@Model.line" />
+                <label><strong>Purpose</strong></label> 
+                <select id="selPurpose" name="selPurpose" class="span12" data-validate="required">
+                @foreach (var item in ViewBag.Purpose)
+                {
+                    if (item.purpose_id == Model.purpose_id)
+                    {
+                    <option value="@item.purpose_id" selected="selected">@item.purpose_name</option>
+                    }
+                    else
+                    {
+                    <option value="@item.purpose_id">@item.purpose_name</option>
+                    }
+                }
+                </select>
+            </div>
+
+            <div class="span7">
+                <label><strong>Change content</strong> <span class="label label-important">Required</span></label>
+                <textarea id="txaChangecontent" name="txaChangecontent" rows="3" class="span12" data-validate="required">@Model.change_content</textarea>
+                <label><strong>Reason</strong> <span class="label label-important">Required</span></label>
+                <textarea id="txaReason" name="txaReason" rows="3" class="span12" data-validate="required">@Model.reason</textarea>
+            </div>
+        </div>
+
+        <div class="span5 well">
+            <label><strong>Attached Document/report</strong> <button id="btnAddFile" type="button" class="btn btn-info"><i class="icon-plus icon-white"></i> Add Attach File</button></label>
+            <div id="divAttach">
+                @foreach (var item in Model.TD_Files)
+                {
+                    if (item.delete_dt == null)
+                    {
+                        <div><button type="button" class="fileDel btn btn-link"><i class="icon-trash"></i></button> <a href="@Url.Content(item.path + item.file_name)" data-gc="@item.group_code" data-yy="@item.year" data-rn="@item.run_no" data-fn="@item.file_name" target="_blank">@item.file_name</a></div>
+                    }
+                    @*else
+                    {
+                        <div><button type="button" class="fileRes btn btn-link"><i class="icon-refresh"></i></button> <a href="@Url.Content(item.path + item.file_name)" data-gc="@item.group_code" data-yy="@item.year" data-rn="@item.run_no" data-fn="@item.file_name" target="_blank">@item.file_name</a></div>
+                    }*@
+                }
+                <div style="padding: 3px 0px 3px 0px;"><input type="file" name="files" class="file" /></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center;">
+        <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+        <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+        <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+        <button type="submit" class="btn btn-primary">Submit by @Session["PCRME_Name"].ToString()</button>
+    </div>
+</form>

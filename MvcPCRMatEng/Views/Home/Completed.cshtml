@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Completed";
+}
+
+<style type="text/css">
+    /*fix jTable*/
+    span.jtable-goto-page select, span.jtable-page-size-change select {
+        height: 25px;
+        width: 60px;
+        padding: 2px 2px;
+        margin-bottom:auto;
+    }
+    div.jtable-main-container table.jtable thead th {
+        text-align: center;
+    }
+    div.jtable-main-container > table.jtable > tbody > tr.jtable-data-row > td {
+        text-align: center;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.strPad = function (i, l, s) {
+            var o = i.toString();
+            if (!s) { s = '0'; }
+            while (o.length < l) { o = s + o; }
+            return o;
+        };
+
+        $('#jTableCompleted').jtable({
+            title: 'Completed PCR',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            //selecting: true, //Enable selecting
+            defaultSorting: 'act_dt', //Set default sorting
+            actions: {
+                listAction: '@Url.Action("CompletedList","Home")'
+            },
+            fields: {
+                group_code: { title: 'GroupCode', list: false },
+                year: { title: 'Year', list: false },
+                run_no: { title: 'Run No.', list: false },
+                print: {
+                    title: 'Print', width: '5%', visibility: 'fixed', sorting: false,
+                    display: function (data) {
+                        return $('<a href="@Url.Action("DownloadViewPDF", "Home")?groupcode=' + data.record.group_code + '&year=' + data.record.year + '&runno=' + data.record.run_no + '" class="PrintPCR" target="_blank"><i class="icon-print"></i></a>');
+                    }
+                },
+                pcr_no: {
+                    title: 'PCR No.', width: '11%', sorting: false,
+                    visibility: 'fixed', //This column always will be shown
+                    display: function (data) {
+                        return $('<a href="#" class="ShowDetail" data-gc="' + data.record.group_code + '" data-yr="' + data.record.year + '" data-rn="' + data.record.run_no + '" data-lv="' + data.record.lv_id + '" data-st="' + data.record.status_id + '">PCR-' + data.record.group_code + '-' + data.record.year + '-' + $.strPad(data.record.run_no, 3) + '</a>');
+                    }
+                },
+                compounditem: { title: 'Compound/Item', width: '12%' },
+                line: { title: 'Line', width: '9%' },
+                change_content: { title: 'Change Content', width: '34%', sorting: false },
+                purpose_name: { title: 'Purpose', width: '13%' },
+                ipqc_rank: { title: 'IPQC Rank', width: '8%'},
+                //status_name: { title: 'Status', width: '12%' },
+                //lv_name: { title: 'Level', width: '12%' },
+                act_dt: { title: 'Date', width: '8%', type: 'date', displayFormat: 'dd-mm-yy' }
+            }
+        });
+
+        //Load list from server
+        //$('#jTableCompleted').jtable('load');
+
+        //Re-load records when user click 'load records' button.
+        $('#btSearch').click(function (e) {
+            e.preventDefault();
+            $('#jTableCompleted').jtable('load', {
+                pcr_no: $('#txtPCR').val(),
+                compound: $('#txtCompound').val(),
+                line: $('#txtLine').val(),
+                purpose: $('#selPurpose').val(),
+                rank: $('#selIPQC').val(),
+                dtFrom: $('#dtFrom').val(),
+                dtTo: $('#dtTo').val()
+            });
+        });
+
+        $('#btSearch').click();
+
+        $('#dialogDetail').dialog({
+            autoOpen: false,
+            width: 800,//'auto',
+            height: 'auto',
+            modal: true,
+            position: { my: "center top+50", at: "center top", of: window }
+        });
+
+        $(document).on("click", ".ShowDetail", function (event) {
+            var $btn = $(this);
+            generateTabs($btn.attr('data-gc'), $btn.attr('data-yr'), $btn.attr('data-rn'), $btn.attr('data-lv'), $btn.attr('data-st'));
+        });
+
+        $("#dtFrom").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#dtTo").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#dtTo").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            numberOfMonths: 1,
+            onClose: function (selectedDate) {
+                $("#dtFrom").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+        @if (TempData["noty"] != null)
+        {
+            <text>noty({
+            text: '@TempData["noty"].ToString()',
+            type: 'warning',
+            layout: 'topCenter',
+            timeout: 6000
+        });
+        </text>
+        }
+
+        function generateTabs(groupcode, year, runno, lv, st) {
+            var htm = '<div id="tabs"><ul>';
+            htm += '<li><a href="@Url.Action("_ShowDetailCompleted")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '">Main</a></li>';
+            htm += '<li><a href="@Url.Action("_ShowFiles")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '">Attached File</a></li>';
+            htm += '<li><a href="@Url.Action("_ShowImplement")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                        + '&st=' + st + '&lv=' + lv + '">Implement</a></li>';
+            htm += '<li><a href="@Url.Action("_ShowTransaction")?groupcode=' + groupcode + '&year=' + year + '&runno=' + runno
+                    + '">Transaction</a></li>';
+            htm += '</ul></div>';
+
+            $('#dialogDetail').children().remove();
+            $('#dialogDetail').append(htm);
+
+            $("#tabs").tabs();
+
+            $("#dialogDetail").dialog("open");
+        }
+    });
+</script>
+
+<h3>@ViewBag.Title</h3>
+
+<form>
+    <table class="table table-condensed" style="width:auto;">
+        <thead>
+            <tr>
+                <th>PCR No.</th>
+                <th>Compound Name/Item Code</th>
+                <th>Mixing Line/Bonding Line</th>
+                <th>Purpose</th>
+                <th>IPQC Rank</th>
+                <th>From</th>
+                <th>To</th>
+                <th><button type="reset" id="btReset" class="btn btn-warning"><i class="icon-trash icon-white"></i> Clear</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" id="txtPCR" name="txtPCR" class="input-medium" /></td>
+                <td><input type="text" id="txtCompound" name="txtCompound" class="" /></td>
+                <td><input type="text" id="txtLine" name="txtLine" class="" /></td>
+                <td><select id="selPurpose" name="selPurpose" class="input-medium">
+                    <option value="0">Select Purpose</option>
+                @foreach (var item in ViewBag.Purpose)
+                {
+                    <option value="@item.purpose_id">@item.purpose_name</option>
+                }
+                </select></td>
+                <td><select id="selIPQC" name="selIPQC" class="input-small">
+                        <option value="">Select Rank</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="No">No</option>
+                    </select>
+                </td>
+                <td><input type="text" id="dtFrom" name="dtFrom" class="input-small"></td>
+                <td><input type="text" id="dtTo" name="dtTo" class="input-small"></td>
+                <td><button type="submit" id="btSearch" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<div id="jTableCompleted"></div>
+
+<div id="dialogDetail" title="Detail"></div>

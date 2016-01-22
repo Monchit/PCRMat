@@ -1,0 +1,36 @@
+﻿@model MvcPCRMatEng.Models.V_Detail_Current
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#formApprove").submit(function () {
+            if (!$.validate({ form: "formApprove" })) {
+                return false;
+            }
+            if (confirm("Are you sure you want to Approve ?")) {
+                //document.forms["formApprove"].submit();
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+
+<form id="formApprove" name="formApprove" action="@Url.Action("Approve", "Home")" method="post" class="row-fluid">
+    <label><strong>Comment</strong></label>
+    <textarea rows="3" class="span8" id="txaComment" name="txaComment"></textarea>
+
+    <label><strong>Judgement</strong></label>
+    <div class="form-inline">
+    <select id="selJudgement" name="selJudgement" data-validate="required" class="span4" >
+        <option value="">--Select Judgement--</option>
+        <option value="2">Approve</option>
+        <option value="3">Reject</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button></div>
+
+    <input type="hidden" value="@Model.group_code" id="hdGC" name="hdGC" />
+    <input type="hidden" value="@Model.year" id="hdYY" name="hdYY" />
+    <input type="hidden" value="@Model.run_no" id="hdRN" name="hdRN" />
+    <input type="hidden" value="@Model.status_id" id="hdST" name="hdST" />
+</form>
